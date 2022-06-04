@@ -3,12 +3,14 @@
 	o = o[o.SuperName];
 
 	local attackEntity = o.attackEntity;
-	o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
+	o.attackEntity = function( ... )
 	{
-		::CareerStats.ActiveUser = _user;
-		::CareerStats.ActiveTarget = _targetEntity;
-		attackEntity(_user, _targetEntity, _allowDiversion = true)
+		::CareerStats.ActiveUser = vargv[0];
+		::CareerStats.ActiveTarget = vargv[1];
+		vargv.insert(0, this)
+		local ret = attackEntity.acall(vargv)
 		::CareerStats.ActiveUser = null;
 		::CareerStats.ActiveTarget = null;
+		return ret;
 	}
 });
