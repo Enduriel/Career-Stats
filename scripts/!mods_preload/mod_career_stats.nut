@@ -1,6 +1,6 @@
 ::CareerStats <- {
 	ID = "mod_career_stats",
-	Version = "0.3.0",
+	Version = "0.5.0",
 	Name = "Career Stats",
 	ActiveUser = null,
 	ActiveTarget = null,
