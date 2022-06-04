@@ -21,7 +21,7 @@ local tacticalRollMatch = regexp("(hits|misses) \\[color=.*\\[\\/color\\] \\(Cha
 				}
 				else
 				{
-					if (chance >= ::CareerStats.MaxHitChance) ++careerStats.Num95PercentHits;
+					if (chance >= ::CareerStats.MaxHitChance) ++careerStats.Num95PercentMisses;
 					++careerStats.NumAccuracyMisses;
 				}
 			}
