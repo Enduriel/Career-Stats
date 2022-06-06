@@ -1,4 +1,6 @@
-var CareerStats = {};
+var CareerStats = {
+	ID : "mod_career_stats"
+};
 
 CareerStats.WorldObituaryScreen_createDiv = WorldObituaryScreen.prototype.createDIV;
 WorldObituaryScreen.prototype.createDIV = function (_parentDiv)
@@ -20,5 +22,5 @@ WorldObituaryScreen.prototype.addListEntry = function (_data)
 {
 	CareerStats.WorldObituaryScreen_addListEntry.call(this, _data);
 	var result = this.mListScrollContainer.children('.l-row:last');
-	result.bindTooltip({ contentType: 'ui-element', elementId: "career-stats.fallen." + _data.CareerStats_Idx });
+	result.bindTooltip({ contentType: 'msu-generic', modId: CareerStats.ID, elementId: "Fallen", CareerStats_Idx: _data.CareerStats_Idx });
 }

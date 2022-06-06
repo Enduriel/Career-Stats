@@ -49,6 +49,10 @@
 		}
 	}
 
+	::CareerStats.Mod.Tooltips.setTooltips({
+		Fallen = ::MSU.Class.CustomTooltip(@(_data) ::World.Statistics.CareerStats_getTooltipForFallen(_data.CareerStats_Idx))
+	});
+
 	::include("career_stats/player");
 	::include("career_stats/player_corpse_stub");
 	::include("career_stats/skill");
@@ -56,7 +60,6 @@
 	::include("career_stats/statistics_manager");
 	::include("career_stats/tactical_screen_topbar_event_log");
 	::include("career_stats/tactical_state");
-	::include("career_stats/tooltip_events");
 	::include("career_stats/world_obituary_screen");
 	::include("career_stats/world_player_roster");
 	::include("career_stats/world_state");
