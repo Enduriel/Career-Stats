@@ -1,15 +1,19 @@
 ::mods_hookNewObjectOnce("statistics/statistics_manager", function (o)
 {
 	local addFallen = o.addFallen;
-	o.addFallen = function( _fallen )
+	// _fallen
+	o.addFallen = function( ... )
 	{
-		::CareerStats.LastFallen = _fallen;
-		addFallen(_fallen);
+		vargv.insert(0, this);
+		::CareerStats.LastFallen = vargv[1];
+		return addFallen.acall(vargv);
 	}
 
 	local onSerialize = o.onSerialize;
-	o.onSerialize = function( _out )
+	// _out
+	o.onSerialize = function( ... )
 	{
+		vargv.insert(0, this);
 		local fallenWithCareerStats = []
 		for (local i = 0; i < this.m.Fallen.len(); ++i)
 		{
@@ -20,14 +24,16 @@
 			}
 		}
 		::CareerStats.Mod.Serialization.flagSerialize("CareerStats_FallenWithStats", fallenWithCareerStats, this.m.Flags);
-		onSerialize(_out);
+		return onSerialize.acall(vargv);
 	}
 
 	local onDeserialize = o.onDeserialize;
-	o.onDeserialize = function( _in )
+	// _in
+	o.onDeserialize = function( ... )
 	{
-		onDeserialize(_in);
-		if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("0.2.0", _in.getMetaData()))
+		vargv.insert(0, this);
+		local ret = onDeserialize.acall(vargv);
+		if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("0.2.0", vargv[1].getMetaData()))
 		{
 			local fallenWithCareerStats = ::CareerStats.Mod.Serialization.flagDeserialize("CareerStats_FallenWithStats", null, this.m.Flags);
 

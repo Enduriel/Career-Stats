@@ -3,13 +3,15 @@ local tacticalRollMatch = regexp("(hits|misses) \\[color=.*\\[\\/color\\] \\(Cha
 ::mods_hookExactClass("ui/screens/tactical/modules/topbar/tactical_screen_topbar_event_log", function (o)
 {
 	local logEx = o.logEx;
-	o.logEx = function( _text )
+	// _text
+	o.logEx = function( ... )
 	{
-		local capture = tacticalRollMatch.capture(_text);
+		vargv.insert(0, this);
+		local capture = tacticalRollMatch.capture(vargv[1]);
 		if (capture != null)
 		{
-			local chance = ::MSU.regexMatch(capture, _text, 2).tointeger();
-			local hits = ::MSU.regexMatch(capture, _text, 1) == "hits";
+			local chance = ::MSU.regexMatch(capture, vargv[1], 2).tointeger();
+			local hits = ::MSU.regexMatch(capture, vargv[1], 1) == "hits";
 
 			if (::MSU.isKindOf(::CareerStats.ActiveUser, "player"))
 			{
@@ -39,6 +41,6 @@ local tacticalRollMatch = regexp("(hits|misses) \\[color=.*\\[\\/color\\] \\(Cha
 				}
 			}
 		}
-		logEx(_text);
+		return logEx.acall(vargv);
 	}
 });

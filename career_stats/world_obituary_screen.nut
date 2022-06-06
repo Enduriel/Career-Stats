@@ -1,9 +1,10 @@
 ::mods_hookNewObjectOnce("ui/screens/world/world_obituary_screen", function (o)
 {
 	local convertFallenToUIData = o.convertFallenToUIData;
-	o.convertFallenToUIData = function()
+	o.convertFallenToUIData = function(...)
 	{
-		local ret = convertFallenToUIData();
+		vargv.insert(0, this);
+		local ret = convertFallenToUIData.acall(vargv);
 		ret.Fallen = clone ret.Fallen;
 		foreach (idx, fallen in ret.Fallen)
 		{

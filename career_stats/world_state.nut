@@ -1,26 +1,33 @@
 ::mods_hookExactClass("states/world_state", function (o)
 {
 	local onBeforeDeserialize = o.onBeforeDeserialize;
-	o.onBeforeDeserialize = function( _in )
+	// _out
+	o.onBeforeDeserialize = function( ... )
 	{
+		vargv.insert(0, this);
 		::CareerStats.IsLoading = true;
-		onBeforeDeserialize(_in);
+		return onBeforeDeserialize.acall(vargv);
 	}
 
 	local onDeserialize = o.onDeserialize;
-	o.onDeserialize = function( _in )
+	// _in
+	o.onDeserialize = function( ... )
 	{
-		onDeserialize(_in);
+		vargv.insert(0, this);
+		local ret = onDeserialize.acall(vargv);
 		::CareerStats.IsLoading = false;
 		::CareerStats.evaluateRanks();
+		return ret;
 	}
 
 	local startNewCampaign = o.startNewCampaign;
-	o.startNewCampaign = function()
+	o.startNewCampaign = function(...)
 	{
+		vargv.insert(0, this);
 		::CareerStats.IsLoading = true;
-		startNewCampaign();
+		local ret = startNewCampaign.acall(vargv);
 		::CareerStats.IsLoading = false;
 		::CareerStats.evaluateRanks();
+		return ret;
 	}
 });

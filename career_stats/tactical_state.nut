@@ -1,9 +1,12 @@
 ::mods_hookExactClass("states/tactical_state", function (o)
 {
 	local gatherBrothers = o.gatherBrothers;
-	o.gatherBrothers = function( _isVictory )
+	// _isVictory
+	o.gatherBrothers = function( ... )
 	{
-		gatherBrothers(_isVictory);
+		vargv.insert(0, this);
+		local ret = gatherBrothers.acall(vargv);
 		::CareerStats.evaluateRanks();
+		return ret;
 	}
 });

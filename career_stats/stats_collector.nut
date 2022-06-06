@@ -1,27 +1,30 @@
 ::mods_hookExactClass("skills/special/stats_collector", function (o)
 {
 	local onTargetHit = o.onTargetHit;
-	o.onTargetHit = function( _skill, _targetEntity, _bodyPart, _damageInflictedHitpoints, _damageInflictedArmor )
+	// _skill, _targetEntity, _bodyPart, _damageInflictedHitpoints, _damageInflictedArmor
+	o.onTargetHit = function( ... )
 	{
-		onTargetHit(_skill, _targetEntity, _bodyPart, _damageInflictedHitpoints, _damageInflictedArmor);
+		vargv.insert(0, this);
+		local ret = onTargetHit.acall(vargv);
 		local careerStats = this.getContainer().getActor().m.CareerStats_Stats.m.Stats;
 
-		if (_damageInflictedArmor + _damageInflictedHitpoints > careerStats.MaxDamageAttackArmor + careerStats.MaxDamageAttackHitpoints)
+		if (vargv[5] + vargv[4] > careerStats.MaxDamageAttackArmor + careerStats.MaxDamageAttackHitpoints)
 		{
-			careerStats.MaxDamageAttackArmor = _damageInflictedArmor;
-			careerStats.MaxDamageAttackHitpoints = _damageInflictedHitpoints;
+			careerStats.MaxDamageAttackArmor = vargv[5];
+			careerStats.MaxDamageAttackHitpoints = vargv[4];
 		}
 
-		if (_damageInflictedArmor > careerStats.MaxDamageArmor)
+		if (vargv[5] > careerStats.MaxDamageArmor)
 		{
-			careerStats.MaxDamageArmor = _damageInflictedArmor;
+			careerStats.MaxDamageArmor = vargv[5];
 		}
-		if (_damageInflictedHitpoints > careerStats.MaxDamageHitpoints)
+		if (vargv[4] > careerStats.MaxDamageHitpoints)
 		{
 			careerStats.MaxDamageHitpoints;
 		}
 
-		if (_bodyPart == ::Const.BodyPart.Head) ++careerStats.NumHeadHits;
+		if (vargv[3] == ::Const.BodyPart.Head) ++careerStats.NumHeadHits;
 		++careerStats.NumHits;
+		return ret;
 	}
 });

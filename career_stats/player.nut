@@ -3,10 +3,12 @@
 	o.m.CareerStats_Stats <- null;
 
 	local create = o.create;
-	o.create = function()
+	o.create = function( ... )
 	{
-		create();
+		vargv.insert(0, this);
+		local ret = create.acall(vargv);
 		this.m.CareerStats_Stats = ::new("scripts/mods/career_stats/career_stats");
+		return ret;
 	}
 
 	o.CareerStats_updateCombatStats <- function()
@@ -19,49 +21,60 @@
 	}
 
 	local onBeforeCombatResult = o.onBeforeCombatResult;
-	o.onBeforeCombatResult = function()
+	o.onBeforeCombatResult = function( ... )
 	{
-		onBeforeCombatResult();
+		vargv.insert(0, this);
+		local ret = onBeforeCombatResult.acall(vargv);
 		this.CareerStats_updateCombatStats();
+		return ret;
 	}
 
 	local getRosterTooltip = o.getRosterTooltip;
-	o.getRosterTooltip = function()
+	o.getRosterTooltip = function( ... )
 	{
-		local ret = getRosterTooltip();
+		vargv.insert(0, this);
+		local ret = getRosterTooltip.acall(vargv);
 		this.m.CareerStats_Stats.extendTooltip(ret, 6);
 		return ret;
 	}
 
 	local onDeath = o.onDeath;
-	o.onDeath = function( _killer, _skill, _tile, _fatalityType )
+	// _killer, _skill, _tile, _fatalityType
+	o.onDeath = function( ... )
 	{
-		onDeath(_killer, _skill, _tile, _fatalityType);
+		vargv.insert(0, this);
+		local ret = onDeath.acall(vargv);
 		if (!this.isGuest())
 		{
 			this.m.CareerStats_Stats.clearRanks();
 			::Tactical.getCasualtyRoster().getAll()[::Tactical.getCasualtyRoster().getAll().len() - 1].m.CareerStats_Stats = this.m.CareerStats_Stats;
 		}
-		if (!this.m.IsGuest && !this.Tactical.State.isScenarioMode() && _fatalityType != this.Const.FatalityType.Unconscious && (_skill != null && _killer != null || _fatalityType == this.Const.FatalityType.Devoured || _fatalityType == this.Const.FatalityType.Kraken))
+		if (!this.m.IsGuest && !this.Tactical.State.isScenarioMode() && vargv[4] != this.Const.FatalityType.Unconscious && (vargv[2] != null && vargv[1] != null || vargv[4] == this.Const.FatalityType.Devoured || vargv[4] == this.Const.FatalityType.Kraken))
 		{
 			this.CareerStats_updateCombatStats();
 		}
+		return ret;
 	}
 
 	local onSerialize = o.onSerialize;
-	o.onSerialize = function(_out)
+	// _out
+	o.onSerialize = function( ... )
 	{
 		::CareerStats.Mod.Serialization.flagSerializeBBObject("CareerStats", this.m.CareerStats_Stats, this.getFlags());
-		onSerialize(_out);
+		vargv.insert(0, this);
+		return onSerialize.acall(vargv);
 	}
 
 	local onDeserialize = o.onDeserialize;
-	o.onDeserialize = function(_in)
+	// _in
+	o.onDeserialize = function( ... )
 	{
-		onDeserialize(_in);
-		if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("0.1.0", _in.getMetaData()))
+		vargv.insert(0, this);
+		local ret = onDeserialize.acall(vargv);
+		if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("0.1.0", vargv[1].getMetaData()))
 		{
 			::CareerStats.Mod.Serialization.flagDeserializeBBObject("CareerStats", this.m.CareerStats_Stats, this.getFlags());
 		}
+		return ret;
 	}
 });
