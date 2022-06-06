@@ -178,21 +178,21 @@ this.career_stats <- {
 
 			this.makeTooltipSegment("ui/icons/regular_damage.png", this.m.Ranks.MaxDamage,
 				format("Heaviest Hit %s (%s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img])",
-					::MSU.String.colorBlue(this.getMaxDamage().tostring()),
+					::MSU.String.color("#002869", this.getMaxDamage().tostring()),
 					::MSU.String.colorGreen(this.m.Stats.MaxDamageAttackHitpoints.tostring()),
 					::MSU.String.colorGreen(this.m.Stats.MaxDamageAttackArmor.tostring()))),
 
 			this.makeTooltipSegment("ui/icons/hitchance.png", this.m.Ranks.AvgHitChance,
 				format("Hit Chance %s%%",
-					::MSU.String.colorBlue(::Math.round(this.getAvgHitChance() * 100).tostring()))),
+					::MSU.String.color("#002869", ::Math.round(this.getAvgHitChance() * 100).tostring()))),
 
 			this.makeTooltipSegment("ui/icons/chance_to_hit_head.png", this.m.Ranks.AvgHeadshotChance,
 				format("Headshot Chance %s%%",
-					::MSU.String.colorBlue(::Math.round(this.getAvgHeadshotChance() * 100).tostring()))),
+					::MSU.String.color("#002869", ::Math.round(this.getAvgHeadshotChance() * 100).tostring()))),
 
 			this.makeTooltipSegment("ui/icons/melee_defense.png", this.m.Ranks.AvgDodgeChance,
 				format("Dodge Chance %s%%",
-					::MSU.String.colorBlue(::Math.round(this.getAvgDodgeChance() * 100).tostring()))),
+					::MSU.String.color("#002869", ::Math.round(this.getAvgDodgeChance() * 100).tostring()))),
 
 			this.makeTooltipSegment("ui/icons/mood_07.png", this.m.Ranks.Num5PercentHits,
 				format("Lucky 5%% Hits %s",
