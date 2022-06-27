@@ -5,8 +5,9 @@
 	o.addFallen = function( ... )
 	{
 		vargv.insert(0, this);
-		::CareerStats.LastFallen = vargv[1];
-		return addFallen.acall(vargv);
+		local ret = addFallen.acall(vargv);
+		::CareerStats.LastFallen = this.m.Fallen[0]; // because legends handles this function differently I instead rely on the fact that this.m.Fallen[0] is the latest dead character
+		return ret;
 	}
 
 	local onSerialize = o.onSerialize;
