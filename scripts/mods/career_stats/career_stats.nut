@@ -171,7 +171,7 @@ this.career_stats <- {
 					::MSU.String.colorRed(this.m.Stats.DamageReceivedHitpoints.tostring()),
 					::MSU.String.colorRed(this.m.Stats.DamageReceivedArmor.tostring()))),
 
-			this.makeTooltipSegment("mods/career_stats/damage_received_percent.png", this.m.Ranks.DamageDealtAvg,
+			this.makeTooltipSegment("mods/career_stats/damage_received_percent.png", this.m.Ranks.DamageReceivedAvg,
 				format("Avg DMG/Battle Received %s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img]",
 					::MSU.String.colorRed(this.getDamageReceivedAvgHitpoints().tostring()),
 					::MSU.String.colorRed(this.getDamageReceivedAvgArmor().tostring()))),
