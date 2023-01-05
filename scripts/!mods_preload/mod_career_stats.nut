@@ -1,6 +1,6 @@
 ::CareerStats <- {
 	ID = "mod_career_stats",
-	Version = "0.6.2",
+	Version = "1.0.0-rc.1",
 	Name = "Career Stats",
 	ActiveUser = null,
 	ActiveTarget = null,
@@ -14,9 +14,12 @@
 
 ::mods_registerMod(::CareerStats.ID, ::CareerStats.Version, ::CareerStats.Name);
 
-::mods_queue(::CareerStats.ID, "mod_msu(>=1.1.0-0.snowmanbuild)", function() // should be updated to require 1.1.0
+::mods_queue(::CareerStats.ID, "mod_msu(>=1.2.0-rc.1)", function()
 {
 	::CareerStats.Mod <- ::MSU.Class.Mod(::CareerStats.ID, ::CareerStats.Version, ::CareerStats.Name);
+
+	::CareerStats.Mod.Registry.addModSource(::MSU.System.Registry.ModSourceDomain.GitHub, "https://github.com/Enduriel/Career-Stats");
+	::CareerStats.Mod.Registry.setUpdateSource(::MSU.System.Registry.ModSourceDomain.GitHub);
 
 	local currentStatGetter;
 

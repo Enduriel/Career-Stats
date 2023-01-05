@@ -158,49 +158,49 @@ this.career_stats <- {
 		_tooltip.extend([
 			this.makeTooltipSegment("ui/icons/damage_dealt.png", this.m.Ranks.DamageDealt,
 				format("DMG Dealt %s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img]",
-					::MSU.String.colorGreen(this.m.Stats.DamageDealtHitpoints.tostring()),
-					::MSU.String.colorGreen(this.m.Stats.DamageDealtArmor.tostring()))),
+					::MSU.Text.colorGreen(this.m.Stats.DamageDealtHitpoints.tostring()),
+					::MSU.Text.colorGreen(this.m.Stats.DamageDealtArmor.tostring()))),
 
 			this.makeTooltipSegment("mods/career_stats/damage_dealt_percent.png", this.m.Ranks.DamageDealtAvg,
 				format("Avg DMG/Battle %s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img]",
-					::MSU.String.colorGreen(this.getDamageDealtAvgHitpoints().tostring()),
-					::MSU.String.colorGreen(this.getDamageDealtAvgArmor().tostring()))),
+					::MSU.Text.colorGreen(this.getDamageDealtAvgHitpoints().tostring()),
+					::MSU.Text.colorGreen(this.getDamageDealtAvgArmor().tostring()))),
 
 			this.makeTooltipSegment("ui/icons/damage_received.png", this.m.Ranks.DamageReceived,
 				format("DMG Received %s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img]",
-					::MSU.String.colorRed(this.m.Stats.DamageReceivedHitpoints.tostring()),
-					::MSU.String.colorRed(this.m.Stats.DamageReceivedArmor.tostring()))),
+					::MSU.Text.colorRed(this.m.Stats.DamageReceivedHitpoints.tostring()),
+					::MSU.Text.colorRed(this.m.Stats.DamageReceivedArmor.tostring()))),
 
 			this.makeTooltipSegment("mods/career_stats/damage_received_percent.png", this.m.Ranks.DamageReceivedAvg,
 				format("Avg DMG/Battle Received %s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img]",
-					::MSU.String.colorRed(this.getDamageReceivedAvgHitpoints().tostring()),
-					::MSU.String.colorRed(this.getDamageReceivedAvgArmor().tostring()))),
+					::MSU.Text.colorRed(this.getDamageReceivedAvgHitpoints().tostring()),
+					::MSU.Text.colorRed(this.getDamageReceivedAvgArmor().tostring()))),
 
 			this.makeTooltipSegment("ui/icons/regular_damage.png", this.m.Ranks.MaxDamage,
 				format("Heaviest Hit %s (%s[img]gfx/mods/career_stats/health_mini.png[/img]%s[img]gfx/mods/career_stats/armor_body_mini.png[/img])",
-					::MSU.String.color("#002869", this.getMaxDamage().tostring()),
-					::MSU.String.colorGreen(this.m.Stats.MaxDamageAttackHitpoints.tostring()),
-					::MSU.String.colorGreen(this.m.Stats.MaxDamageAttackArmor.tostring()))),
+					::MSU.Text.color("#002869", this.getMaxDamage().tostring()),
+					::MSU.Text.colorGreen(this.m.Stats.MaxDamageAttackHitpoints.tostring()),
+					::MSU.Text.colorGreen(this.m.Stats.MaxDamageAttackArmor.tostring()))),
 
 			this.makeTooltipSegment("ui/icons/hitchance.png", this.m.Ranks.AvgHitChance,
 				format("Hit Chance %s%%",
-					::MSU.String.color("#002869", ::Math.round(this.getAvgHitChance() * 100).tostring()))),
+					::MSU.Text.color("#002869", ::Math.round(this.getAvgHitChance() * 100).tostring()))),
 
 			this.makeTooltipSegment("ui/icons/chance_to_hit_head.png", this.m.Ranks.AvgHeadshotChance,
 				format("Headshot Chance %s%%",
-					::MSU.String.color("#002869", ::Math.round(this.getAvgHeadshotChance() * 100).tostring()))),
+					::MSU.Text.color("#002869", ::Math.round(this.getAvgHeadshotChance() * 100).tostring()))),
 
 			this.makeTooltipSegment("ui/icons/melee_defense.png", this.m.Ranks.AvgDodgeChance,
 				format("Dodge Chance %s%%",
-					::MSU.String.color("#002869", ::Math.round(this.getAvgDodgeChance() * 100).tostring()))),
+					::MSU.Text.color("#002869", ::Math.round(this.getAvgDodgeChance() * 100).tostring()))),
 
 			this.makeTooltipSegment("ui/icons/mood_07.png", this.m.Ranks.Num5PercentHits,
 				format("Lucky 5%% Hits %s",
-					::MSU.String.colorGreen(this.getNum5PercentHits().tostring()))),
+					::MSU.Text.colorGreen(this.getNum5PercentHits().tostring()))),
 
 			this.makeTooltipSegment("ui/icons/mood_01.png", this.m.Ranks.Num95PercentMisses,
 				format("Unlucky 95%% Misses %s",
-					::MSU.String.colorRed(this.getNum95PercentMisses().tostring())))
+					::MSU.Text.colorRed(this.getNum95PercentMisses().tostring())))
 		]);
 	}
 
@@ -220,7 +220,7 @@ this.career_stats <- {
 
 	function onDeserialize( _in )
 	{
-		::MSU.Utils.deserialize(_in, this.m.Stats);
+		::MSU.Utils.deserializeInto(this.m.Stats, _in);
 	}
 
 }
