@@ -19,7 +19,7 @@
 			if ("CareerStats_Stats" in this.m.Fallen[i])
 			{
 				fallenWithCareerStats.push(i);
-				::CareerStats.Mod.Serialization.flagSerialize(i.tostring(), this.m.Fallen[i].CareerStats_Stats, this.m.Flags);
+				this.m.Fallen[i].CareerStats_Stats.onSerialize(::CareerStats.Mod.Serialization.getSerializationEmulator("StatsFor" + i, this.m.Flags));
 			}
 		}
 		::CareerStats.Mod.Serialization.flagSerialize("FallenWithStats", fallenWithCareerStats, this.m.Flags);
@@ -34,17 +34,17 @@
 		{
 			local fallenWithCareerStats;
 			if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("1.0.0-rc.1", _in.getMetaData()))
-				fallenWithCareerStats = ::CareerStats.Mod.Serialization.flagDeserialize("FallenWithStats", null, this.m.Flags);
+				fallenWithCareerStats = ::CareerStats.Mod.Serialization.flagDeserialize("FallenWithStats", [], null, this.m.Flags);
 			else
-				fallenWithCareerStats = ::CareerStats.Mod.Serialization.flagDeserialize("CareerStats_FallenWithStats", null, this.m.Flags);
+				fallenWithCareerStats = ::CareerStats.Mod.Serialization.flagDeserialize("CareerStats_FallenWithStats", [], null, this.m.Flags);
 
 			foreach (i in fallenWithCareerStats)
 			{
 				this.m.Fallen[i].CareerStats_Stats <- ::new("scripts/mods/career_stats/career_stats");
 				if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("1.0.0-rc.1", _in.getMetaData()))
-					::CareerStats.Mod.Serialization.flagDeserialize(i.tostring(), this.m.Fallen[i].CareerStats_Stats, this.m.Flags);
+					this.m.Fallen[i].CareerStats_Stats.onDeserialize(::CareerStats.Mod.Serialization.getDeserializationEmulator("StatsFor" + i, this.m.Flags));
 				else
-					::CareerStats.Mod.Serialization.flagDeserialize("CareerStats_Fallen" + i, this.m.Fallen[i].CareerStats_Stats, this.m.Flags);
+					this.m.Fallen[i].CareerStats_Stats.onDeserialize(::CareerStats.Mod.Serialization.getDeserializationEmulator("CareerStats_Fallen" + i, this.m.Flags));
 			}
 		}
 	}

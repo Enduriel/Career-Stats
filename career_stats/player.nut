@@ -60,7 +60,7 @@
 	// _out
 	o.onSerialize = function( ... )
 	{
-		::CareerStats.Mod.Serialization.flagSerialize("CareerStats", this.m.CareerStats_Stats, this.getFlags());
+		this.m.CareerStats_Stats.onSerialize(::CareerStats.Mod.Serialization.getSerializationEmulator("CareerStats", this.getFlags()));
 		vargv.insert(0, this);
 		return onSerialize.acall(vargv);
 	}
@@ -72,7 +72,7 @@
 		vargv.insert(0, this);
 		local ret = onDeserialize.acall(vargv);
 		if (::CareerStats.Mod.Serialization.isSavedVersionAtLeast("0.1.0", vargv[1].getMetaData()))
-			::CareerStats.Mod.Serialization.flagDeserialize("CareerStats", this.m.CareerStats_Stats, this.getFlags());
+			this.m.CareerStats_Stats.onDeserialize(::CareerStats.Mod.Serialization.getDeserializationEmulator("CareerStats", this.getFlags()));
 		return ret;
 	}
 });
