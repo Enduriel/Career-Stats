@@ -14,7 +14,7 @@
 
 ::mods_registerMod(::CareerStats.ID, ::CareerStats.Version, ::CareerStats.Name);
 
-::mods_queue(::CareerStats.ID, "mod_msu(>=1.2.0-rc.1)", function()
+::mods_queue(::CareerStats.ID, "mod_msu(>=1.2.0)", function()
 {
 	::CareerStats.Mod <- ::MSU.Class.Mod(::CareerStats.ID, ::CareerStats.Version, ::CareerStats.Name);
 
