@@ -19,6 +19,7 @@
 	::CareerStats.Mod <- ::MSU.Class.Mod(::CareerStats.ID, ::CareerStats.Version, ::CareerStats.Name);
 
 	::CareerStats.Mod.Registry.addModSource(::MSU.System.Registry.ModSourceDomain.GitHub, "https://github.com/Enduriel/Career-Stats");
+	::CareerStats.Mod.Registry.addModSource(::MSU.System.Registry.ModSourceDomain.NexusMods, "https://www.nexusmods.com/battlebrothers/mods/569");
 	::CareerStats.Mod.Registry.setUpdateSource(::MSU.System.Registry.ModSourceDomain.GitHub);
 
 	local currentStatGetter;
